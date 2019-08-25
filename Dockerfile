@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install python packages
-RUN pip3 install argcomplete colorama nose2
+RUN pip3 install nose2 qmk
 
 # upgrade gcc-arm-none-eabi from the default 5.4.1 to 6.3.1 due to ARM runtime issues
 RUN /bin/bash -c "set -o pipefail && \
