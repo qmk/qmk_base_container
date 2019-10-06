@@ -1,15 +1,11 @@
 os: linux
-dist: trusty
-sudo: required
+dist: bionic
 group: edge
-language: c
+language: minimal
 branches:
   except:
     - /^.*-automated-build$/
     - /^[0-9]+\.[0-9]+\.[0-9]+/
-env:
-  global:
-  - MAKEFLAGS="-j3 --output-sync"
 services:
   - docker
 script:
