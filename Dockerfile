@@ -30,7 +30,8 @@ RUN /bin/bash -c "set -o pipefail && \
 
 # upgrade avr-gcc... for reasons?
 RUN /bin/bash -c "set -o pipefail && \
-    wget -q https://blog.zakkemble.net/download/avr-gcc-8.3.0-x64-linux.tar.bz2 -O - | tar xj --strip-components=1 -C /"
+    wget -q https://blog.zakkemble.net/download/avr-gcc-8.3.0-x64-linux.tar.bz2 -O - | tar xj --strip-components=1 -C / && \
+    rm -rf /share/"
 
 # Install python packages
 RUN pip3 install nose2 qmk
