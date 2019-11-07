@@ -1,10 +1,8 @@
 FROM debian:10-slim
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    avr-libc \
     avrdude \
     binutils-arm-none-eabi \
-    binutils-avr \
     build-essential \
     ca-certificates \
     clang-format-7 \
@@ -12,7 +10,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     dfu-util \
     ca-certificates \
     gcc \
-    gcc-avr \
     git \
     libnewlib-arm-none-eabi \
     python3 \
@@ -30,6 +27,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN /bin/bash -c "set -o pipefail && \
     wget -q https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2 -O - | tar xj --strip-components=1 -C / && \
     rm -rf /arm-none-eabi/share/ /share/"
+
+# upgrade avr-gcc... for reasons?
+RUN /bin/bash -c "set -o pipefail && \
+    wget -q https://blog.zakkemble.net/download/avr-gcc-8.3.0-x64-linux.tar.bz2 -O - | tar xj --strip-components=1 -C /"
 
 # Install python packages
 RUN pip3 install nose2 qmk
