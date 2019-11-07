@@ -1,10 +1,8 @@
 FROM debian:11-slim
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    avr-libc \
     avrdude \
     binutils-arm-none-eabi \
-    binutils-avr \
     binutils-riscv64-unknown-elf \
     build-essential \
     ca-certificates \
@@ -14,7 +12,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     dos2unix \
     ca-certificates \
     gcc \
-    gcc-avr \
     gcc-arm-none-eabi \
     gcc-riscv64-unknown-elf \
     git \
@@ -30,6 +27,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
     zip \
     && rm -rf /var/lib/apt/lists/*
+
+# upgrade avr-gcc... for reasons?
+RUN /bin/bash -c "set -o pipefail && \
+    wget -q https://blog.zakkemble.net/download/avr-gcc-8.3.0-x64-linux.tar.bz2 -O - | tar xj --strip-components=1 -C /"
 
 # Install python packages
 RUN python3 -m pip install --upgrade pip setuptools wheel
