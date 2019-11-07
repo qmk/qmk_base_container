@@ -30,7 +30,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 # upgrade avr-gcc... for reasons?
 RUN /bin/bash -c "set -o pipefail && \
-    wget -q https://blog.zakkemble.net/download/avr-gcc-8.3.0-x64-linux.tar.bz2 -O - | tar xj --strip-components=1 -C /"
+    wget -q https://blog.zakkemble.net/download/avr-gcc-8.3.0-x64-linux.tar.bz2 -O - | tar xj --strip-components=1 -C / && \
+    rm -rf /share/"
 
 # Install python packages
 RUN python3 -m pip install --upgrade pip setuptools wheel
