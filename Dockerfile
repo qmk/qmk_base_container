@@ -3,7 +3,6 @@ FROM debian:10-slim
 RUN apt-get update && apt-get install --no-install-recommends -y \
     avr-libc \
     avrdude \
-    binutils-arm-none-eabi \
     binutils-avr \
     build-essential \
     ca-certificates \
