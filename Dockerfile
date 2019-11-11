@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     binutils-avr \
     build-essential \
     ca-certificates \
-    clang \
+    clang-format \
     dfu-programmer \
     dfu-util \
     ca-certificates \
