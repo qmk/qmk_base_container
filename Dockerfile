@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     dfu-programmer \
     dfu-util \
     ca-certificates \
+    ccache \
     gcc \
     gcc-avr \
     git \
