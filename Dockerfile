@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     gcc \
     gcc-avr \
     git \
-    libnewlib-arm-none-eabi \
     python3 \
     python3-pip \
     python3-setuptools \
