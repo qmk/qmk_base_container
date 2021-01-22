@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     clang-format-7 \
     dfu-programmer \
     dfu-util \
+    dos2unix \
     ca-certificates \
     gcc \
     gcc-avr \
