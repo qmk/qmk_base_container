@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python3-setuptools \
     software-properties-common \
     tar \
+    teensy-loader-cli \
     unzip \
     tar \
     wget \
