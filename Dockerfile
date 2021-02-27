@@ -33,7 +33,7 @@ RUN /bin/bash -c "set -o pipefail && \
     rm -rf /arm-none-eabi/share/ /share/"
 
 # Install python packages
-RUN pip3 install nose2 qmk jsonschema  # FIXME(skullydazed): remove jsonschema after merge to master
+RUN pip3 install nose2 qmk
 
 # Set the default location for qmk_firmware
 ENV QMK_HOME /qmk_firmware
