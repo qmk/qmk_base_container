@@ -18,7 +18,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libnewlib-arm-none-eabi \
     python3 \
     python3-pip \
-    python3-setuptools \
     software-properties-common \
     tar \
     unzip \
@@ -33,7 +32,8 @@ RUN /bin/bash -c "set -o pipefail && \
     rm -rf /arm-none-eabi/share/ /share/"
 
 # Install python packages
-RUN pip3 install nose2 qmk
+RUN python3 -m pip install --upgrade pip setuptools wheel
+RUN python3 -m pip install nose2 qmk
 
 # Set the default location for qmk_firmware
 ENV QMK_HOME /qmk_firmware
