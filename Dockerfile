@@ -33,8 +33,8 @@ RUN /bin/bash -c "set -o pipefail && \
     rm -rf /arm-none-eabi/share/ /share/"
 
 # Install python packages
-RUN python3 -m pip install --upgrade pip setuptools wheel
-RUN python3 -m pip install nose2 qmk
+RUN python3 -m pip install --upgrade pip setuptools wheel --no-cache-dir
+RUN python3 -m pip install nose2 qmk --no-cache-dir
 
 # Set the default location for qmk_firmware
 ENV QMK_HOME /qmk_firmware
