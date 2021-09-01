@@ -30,15 +30,8 @@ jobs:
 
       - name: create tag
         run: |
-          SHA=${{ github.sha }}
-          TAG=${IMAGE}:$(TZ=UTC-9 date '+%Y%m')-${SHA:0:7}
-          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
-            LATEST=${IMAGE}:latest
-            echo "TAGS=$LATEST" >> $GITHUB_ENV
-          else
-            echo "TAGS=$TAG" >> $GITHUB_ENV
-          fi
-          echo TAG $TAG
+          TAG=$(curl https://pypi.org/pypi/qmk/json | jq -r ".info.version"):latest
+          echo "TAG=$TAG" >> $GITHUB_ENV
 
       - name: Log in to Docker Hub
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -62,7 +55,7 @@ jobs:
           context: ./
           platforms: ${{ (github.ref == 'refs/heads/master' && 'linux/amd64, linux/arm64') || 'linux/amd64' }}
           push: ${{ github.ref == 'refs/heads/master' }}
-          tags: ${{ env.TAGS }}
+          tags: ${{ env.TAG }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
