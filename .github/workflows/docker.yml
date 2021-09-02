@@ -4,6 +4,8 @@ name: Build/Upload Docker Container
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * *'
   push:
     branches:
       - 'master'
