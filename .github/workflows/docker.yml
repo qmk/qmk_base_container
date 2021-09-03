@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  IMAGE: qmk/base_container
+  CONTAINER_NAME: qmk/base_container
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -29,11 +29,6 @@ jobs:
             ${{ github.ref }}-${{ github.sha }}
             ${{ github.ref }}
             refs/head/master
-
-      - name: create tag
-        run: |
-          TAG=$(curl https://pypi.org/pypi/qmk/json | jq -r ".info.version"):latest
-          echo "TAG=$TAG" >> $GITHUB_ENV
 
       - name: Log in to Docker Hub
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -57,7 +52,7 @@ jobs:
           context: ./
           platforms: ${{ (github.ref == 'refs/heads/master' && 'linux/amd64, linux/arm64') || 'linux/amd64' }}
           push: ${{ github.ref == 'refs/heads/master' }}
-          tags: ${{ env.TAG }}
+          tags: ${{ env.CONTAINER_NAME }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
