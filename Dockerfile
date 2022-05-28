@@ -37,7 +37,7 @@ RUN /bin/bash -c "set -o pipefail && \
 
 # Install python packages
 RUN python3 -m pip install --upgrade pip setuptools wheel
-RUN python3 -m pip install nose2 yapf qmk
+RUN python3 -m pip install nose2 yapf
 
 # Set the default location for qmk_firmware
 ENV QMK_HOME /qmk_firmware
