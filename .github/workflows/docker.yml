@@ -35,4 +35,4 @@ jobs:
           context: ./
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags:  qmk/base_container:latest
+          tags: qmk/base_container:latest
