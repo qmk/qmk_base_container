@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 # upgrade avr-gcc... for reasons?
 ARG TARGETPLATFORM
-RUN /bin/bash -c "if [ \"$TARGETPLATFORM\" != 'linux/amd64' ]; then \
+RUN /bin/bash -c "if [ \"$TARGETPLATFORM\" != 'linux/arm64' ]; then \
         set -o pipefail && \
         wget -q https://github.com/ZakKemble/avr-gcc-build/releases/download/v8.3.0-1/avr-gcc-8.3.0-x64-linux.tar.bz2 -O - | tee /tmp/asdf.tar.bz2 | md5sum -c <(echo '588D0BEA4C5D21A1A06AA17625684417  -') && \
         tar xfj /tmp/asdf.tar.bz2 --strip-components=1 -C / && \
