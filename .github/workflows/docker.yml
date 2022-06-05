@@ -17,7 +17,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Cache Docker layers
