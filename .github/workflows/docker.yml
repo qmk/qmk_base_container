@@ -12,6 +12,13 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        platform:
+        - linux/amd64
+        - linux/arm64
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -33,6 +40,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ matrix.platform }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: qmk/base_container:latest
