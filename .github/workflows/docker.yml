@@ -51,3 +51,4 @@ jobs:
           tags: |
             ghcr.io/qmk/qmk_base_container:latest
             qmkfm/base_container:latest
+          provenance: false
