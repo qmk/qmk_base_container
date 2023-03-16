@@ -49,5 +49,5 @@ jobs:
           platforms: ${{ matrix.platform }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            qmkfm/base_container:latest
             ghcr.io/qmk/qmk_base_container:latest
+            qmkfm/base_container:latest
