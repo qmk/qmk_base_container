@@ -13,12 +13,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        platform:
-        - linux/amd64
-        - linux/arm64
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -47,7 +41,7 @@ jobs:
       - name: Build and Push to Registries
         uses: docker/build-push-action@v4
         with:
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ghcr.io/qmk/qmk_base_container:latest
