@@ -44,7 +44,7 @@ RUN /bin/bash -c "if [ \"$TARGETPLATFORM\" == 'linux/arm64' ]; then \
             avr-libc \
             binutils-avr \
             gcc-avr \
-        && rm -rf /var/lib/apt/lists/* \
+        && rm -rf /var/lib/apt/lists/*; \
     fi"
 
 # Install python packages
