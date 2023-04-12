@@ -38,6 +38,15 @@ RUN /bin/bash -c "if [ \"$TARGETPLATFORM\" != 'linux/arm64' ]; then \
         rm -rf /share/ /tmp/*; \
     fi"
 
+# except on platforms we cannot...
+RUN /bin/bash -c "if [ \"$TARGETPLATFORM\" == 'linux/arm64' ]; then \
+        apt-get update && apt-get install --no-install-recommends -y \
+            avr-libc \
+            binutils-avr \
+            gcc-avr \
+        && rm -rf /var/lib/apt/lists/*; \
+    fi"
+
 # Install python packages
 RUN python3 -m pip install --upgrade pip setuptools wheel
 RUN python3 -m pip install nose2 yapf flake8
