@@ -49,4 +49,4 @@ RUN /bin/bash -c "if [ \"$TARGETPLATFORM\" == 'linux/arm64' ]; then \
 
 # Install python packages
 RUN python3 -m pip install --upgrade pip setuptools wheel
-RUN python3 -m pip install nose2 yapf flake8
+RUN python3 -m pip install nose2 yapf flake8 appdirs
