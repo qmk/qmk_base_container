@@ -3,8 +3,13 @@ FROM debian:12-slim
 RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
     ca-certificates \
+    clang-format \
     curl \
+    diffutils \
+    dos2unix \
     git \
+    hidapi \
+    libhidapi-hidraw0 \
     python3 \
     python3-pip \
     software-properties-common \
