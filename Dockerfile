@@ -7,11 +7,13 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     curl \
     diffutils \
     dos2unix \
+    doxygen \
     git \
     jq \
     libhidapi-hidraw0 \
     python3 \
     python3-pip \
+    rsync \
     software-properties-common \
     sudo \
     tar \
