@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     util-linux \
     wget \
     zip \
+    zstd \
 && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid 1000 qmk \
