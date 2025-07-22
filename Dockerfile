@@ -1,52 +1,38 @@
-FROM debian:11-slim
+FROM debian:12-slim
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    avrdude \
-    binutils-arm-none-eabi \
-    binutils-riscv64-unknown-elf \
     build-essential \
     ca-certificates \
-    clang-format-11 \
-    dfu-programmer \
-    dfu-util \
-    dos2unix \
-    ca-certificates \
-    gcc \
-    gcc-arm-none-eabi \
-    gcc-riscv64-unknown-elf \
+    curl \
     git \
-    libfl2 \
-    libnewlib-arm-none-eabi \
-    picolibc-riscv64-unknown-elf \
     python3 \
     python3-pip \
     software-properties-common \
+    sudo \
     tar \
-    teensy-loader-cli \
     unzip \
-    tar \
+    util-linux \
     wget \
     zip \
-    && rm -rf /var/lib/apt/lists/*
+&& rm -rf /var/lib/apt/lists/*
 
-# upgrade avr-gcc... for reasons?
+RUN groupadd --gid 1000 qmk \
+&& useradd --uid 1000 --gid qmk --shell /bin/bash --create-home qmk \
+&& echo "qmk ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/00-qmk \
+&& chmod 0440 /etc/sudoers.d/00-qmk \
+&& mkdir -p /home/qmk/.local/bin \
+&& chown -R qmk:qmk /home/qmk \
+&& mkdir /qmk_firmware \
+&& mkdir /qmk_userspace \
+&& chown -R qmk:qmk /qmk_firmware \
+&& chown -R qmk:qmk /qmk_userspace
+
+USER 1000:1000
+WORKDIR /qmk_firmware
+
+ENV QMK_FIRMWARE=/qmk_firmware \
+    QMK_HOME=/qmk_firmware \
+    QMK_USERSPACE=/qmk_userspace
+
 ARG TARGETPLATFORM
-RUN /bin/bash -c "if [ \"$TARGETPLATFORM\" != 'linux/arm64' ]; then \
-        set -o pipefail && \
-        wget -q https://github.com/ZakKemble/avr-gcc-build/releases/download/v8.3.0-1/avr-gcc-8.3.0-x64-linux.tar.bz2 -O - | tee /tmp/asdf.tar.bz2 | md5sum -c <(echo '588D0BEA4C5D21A1A06AA17625684417  -') && \
-        tar xfj /tmp/asdf.tar.bz2 --strip-components=1 -C / && \
-        rm -rf /share/ /tmp/*; \
-    fi"
-
-# except on platforms we cannot...
-RUN /bin/bash -c "if [ \"$TARGETPLATFORM\" == 'linux/arm64' ]; then \
-        apt-get update && apt-get install --no-install-recommends -y \
-            avr-libc \
-            binutils-avr \
-            gcc-avr \
-        && rm -rf /var/lib/apt/lists/*; \
-    fi"
-
-# Install python packages
-RUN python3 -m pip install --upgrade pip setuptools wheel
-RUN python3 -m pip install nose2 yapf flake8 appdirs
+RUN /bin/bash -c "curl -fsSL https://install.qmk.fm | sh -s -- --confirm"
