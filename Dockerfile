@@ -38,6 +38,3 @@ WORKDIR /qmk_firmware
 ENV QMK_FIRMWARE=/qmk_firmware \
     QMK_HOME=/qmk_firmware \
     QMK_USERSPACE=/qmk_userspace
-
-ARG TARGETPLATFORM
-RUN /bin/bash -c "curl -fsSL https://install.qmk.fm | sh -s -- --confirm"
