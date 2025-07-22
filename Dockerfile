@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid 1000 qmk \
-&& useradd --uid 1000 --gid qmk --shell /bin/bash --create-home qmk \
+&& useradd --uid 1000 --gid qmk --shell /bin/bash --password $(openssl passwd -1 'qmk') --create-home qmk \
 && echo "qmk ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/00-qmk \
 && chmod 0440 /etc/sudoers.d/00-qmk \
 && mkdir -p /home/qmk/.local/bin \
