@@ -8,7 +8,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     diffutils \
     dos2unix \
     git \
-    hidapi \
     libhidapi-hidraw0 \
     python3 \
     python3-pip \
