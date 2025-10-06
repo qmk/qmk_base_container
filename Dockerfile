@@ -1,4 +1,4 @@
-FROM debian:12-slim
+FROM debian:13-slim
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
@@ -14,7 +14,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python3 \
     python3-pip \
     rsync \
-    software-properties-common \
     sudo \
     tar \
     unzip \
